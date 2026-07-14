@@ -1,0 +1,10 @@
+Timestamp,EventID,Username,SourceIP,Description
+2026-07-12 09:01:15,4624,mquintero,192.168.1.25,Successful Logon
+2026-07-12 09:02:20,4625,administrator,10.10.10.5,Failed Logon
+2026-07-12 09:02:24,4625,administrator,10.10.10.5,Failed Logon
+2026-07-12 09:02:28,4625,administrator,10.10.10.5,Failed Logon
+2026-07-12 09:02:33,4625,administrator,10.10.10.5,Failed Logon
+2026-07-12 09:03:11,4672,administrator,10.10.10.5,Special Privileges Assigned
+2026-07-12 09:03:20,4720,hacker,10.10.10.5,User Account Created
+2026-07-12 09:04:15,4728,hacker,10.10.10.5,Added to Administrators
+2026-07-12 09:05:50,4688,hacker,10.10.10.5,PowerShell Started
