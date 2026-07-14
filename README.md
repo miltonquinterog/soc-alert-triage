@@ -44,12 +44,28 @@ soc-alert-triage/
 │   └── suspicious_ips.py
 │
 ├── reports/
-│
+│   └── classified_events.csv (generated after execution)
 ├── requirements.txt
 └── README.md
 ```
 
 ---
+## Output
+
+After running the script, a classified report is generated automatically:
+
+```text
+reports/classified_events.csv
+```
+
+The report includes:
+
+- Timestamp
+- Event ID
+- Severity
+- Username
+- Source IP
+- Description
 
 ## Scripts
 

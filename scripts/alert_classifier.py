@@ -45,4 +45,15 @@ print(
             "SourceIP",
         ]    
     ]
-)    
+)
+
+# Guardar el resultado en un nuevo archivo CSV
+output_file = BASE_DIR / "reports" / "classified_events.csv"
+
+
+df.to_csv(output_file, index=False)
+
+
+print("\nReporte generado correctamente:")
+print(output_file)
+
