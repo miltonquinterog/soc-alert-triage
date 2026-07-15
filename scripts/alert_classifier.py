@@ -1,59 +1,130 @@
 from pathlib import Path
 import pandas as pd
 
-# Clasificacion de eventos por severidad
-severity = {
+# ==========================
+# Project Paths
+# ==========================
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+CSV_FILE = BASE_DIR / "data" / "windows_security.csv"
+OUTPUT_FILE = BASE_DIR / "reports" / "classified_events.csv"
+
+# ==========================
+# Event Severity Mapping
+# ==========================
+
+SEVERITY = {
     4624: "Low",
     4625: "Medium",
     4672: "High",
     4688: "Medium",
     4720: "Critical",
     4728: "Critical",
-}        
-
-# Obtener la carpeta raíz del proyecto
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-# Ruta al archivo CSV
-csv_file = BASE_DIR / "data"/ "windows_security.csv"
+}
 
 
-# Leer el archivo                                
-print(BASE_DIR)
-print(csv_file)
-df = pd.read_csv(csv_file)
-
-# Agregar la columna Severity
-df["Severity"] = df["EventID"].map(severity)
+def load_events():
+    """
+    Load Windows Security Events from CSV.
+    """
+    return pd.read_csv(CSV_FILE)
 
 
-print("=" * 50)
-print("SOC ALERT TRIAGE")
-print("=" * 50)
-
-print(f"\nTotal de eventos: {len(df)}")
-
-print("\nEventos encontrados:\n")
-
-print(
-    df[
-        [
-            "Timestamp",
-            "EventID",
-            "Severity",
-            "Username",
-            "SourceIP",
-        ]    
-    ]
-)
-
-# Guardar el resultado en un nuevo archivo CSV
-output_file = BASE_DIR / "reports" / "classified_events.csv"
+def classify_events(df):
+    """
+    Assign a severity level based on the Windows Event ID.
+    """
+    df["Severity"] = df["EventID"].map(SEVERITY)
+    return df
 
 
-df.to_csv(output_file, index=False)
+def print_summary(df):
+    """
+    Display event summary and critical alerts.
+    """
+
+    print("=" * 60)
+    print("SOC ALERT TRIAGE")
+    print("=" * 60)
+
+    print(f"\nTotal Events: {len(df)}")
+
+    print("\nAnalyzed Events:\n")
+
+    print(
+        df[
+            [
+                "Timestamp",
+                "EventID",
+                "Severity",
+                "Username",
+                "SourceIP",
+            ]
+        ]
+    )
+
+    print("\n" + "=" * 60)
+    print("ALERT SUMMARY")
+    print("=" * 60)
+
+    summary = df["Severity"].value_counts()
+
+    for level in ["Critical", "High", "Medium", "Low"]:
+        print(f"{level:<10}: {summary.get(level, 0)}")
+
+    print("\n" + "=" * 60)
+    print("CRITICAL ALERTS")
+    print("=" * 60)
+
+    critical = df[df["Severity"] == "Critical"]
+
+    if critical.empty:
+        print("No critical alerts detected.")
+
+    else:
+        print(
+            critical[
+                [
+                    "Timestamp",
+                    "EventID",
+                    "Username",
+                    "SourceIP",
+                    "Description",
+                ]
+            ]
+        )
 
 
-print("\nReporte generado correctamente:")
-print(output_file)
+def generate_report(df):
+    """
+    Save classified events into a CSV report.
+    """
 
+    df.to_csv(OUTPUT_FILE, index=False)
+
+    print("\nReport generated successfully.")
+    print(f"Location: {OUTPUT_FILE}")
+
+
+def main():
+
+    try:
+
+        events = load_events()
+
+        events = classify_events(events)
+
+        print_summary(events)
+
+        generate_report(events)
+
+    except FileNotFoundError:
+        print("Error: windows_security.csv was not found.")
+
+    except Exception as error:
+        print(f"Unexpected error: {error}")
+
+
+if __name__ == "__main__":
+    main()
