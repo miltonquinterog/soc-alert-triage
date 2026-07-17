@@ -1,116 +1,88 @@
-# SOC Alert Triage
+# 🛡️ SOC Alert Triage Toolkit
 
-## Overview
+# 🛡️ SOC Alert Triage Toolkit
 
-SOC Alert Triage is a beginner-friendly cybersecurity project developed in Python to simulate common tasks performed by a Security Operations Center (SOC) Level 1 analyst.
+![Python](https://img.shields.io/badge/Python-3.12-blue)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Status](https://img.shields.io/badge/Status-v1.0-success)
 
-The project analyzes Windows Security Event logs stored in CSV format and helps identify suspicious activity through simple detection scripts.
+A Python-based toolkit that simulates common Security Operations Center (SOC) tasks by analyzing Windows Security Event Logs.
 
-This project was created as part of my cybersecurity learning path and portfolio.
-
----
-
-## Objectives
-
-- Analyze Windows Security Event logs.
-- Classify security alerts by severity.
-- Detect possible brute-force attacks.
-- Identify suspicious IP addresses.
-- Practice log analysis using Python.
+The project focuses on detecting suspicious activity, classifying security alerts, identifying brute-force attacks, and detecting basic Indicators of Compromise (IoCs) using simulated Windows event logs.
 
 ---
 
-## Technologies
+## 📋 Project Overview
 
-- Python 3
-- Pandas
-- Git
-- GitHub
-- Kali Linux
+SOC Alert Triage Toolkit was developed as a portfolio project to demonstrate fundamental SOC Analyst skills.
+
+The toolkit analyzes Windows Security Event logs stored in CSV format and produces security reports that help prioritize incidents for investigation.
+
+Although the dataset is simulated, the Event IDs and detection logic are based on real Windows Security Events.
 
 ---
 
-## Project Structure
+## ✨ Features
 
-```
+- Alert classification by Windows Event ID
+- Severity prioritization (Low, Medium, High, Critical)
+- Brute-force attack detection
+- Indicator of Compromise (IoC) detection
+- CSV report generation
+- Interactive command-line menu
+- Modular project architecture
+- Centralized configuration
+
+---
+
+## 📂 Project Structure
+
+```text
 soc-alert-triage/
+
+├── config/
+│   ├── __init__.py
+│   └── settings.py
 │
 ├── data/
 │   └── windows_security.csv
 │
+├── reports/
+│   ├── classified_events.csv
+│   ├── brute_force_report.csv
+│   └── ioc_report.csv
+│
 ├── scripts/
+│   ├── __init__.py
 │   ├── alert_classifier.py
 │   ├── brute_force_detector.py
-│   └── suspicious_ips.py
+│   └── ioc_detector.py
 │
-├── reports/
-│   └── classified_events.csv (generated after execution)
+├── images/
+│
+├── main.py
 ├── requirements.txt
+├── LICENSE
 └── README.md
 ```
 
 ---
-## Output
 
-After running the script, a classified report is generated automatically:
+## ⚙️ Installation
 
-```text
-reports/classified_events.csv
-```
-
-The report includes:
-
-- Timestamp
-- Event ID
-- Severity
-- Username
-- Source IP
-- Description
-
-## Scripts
-
-### alert_classifier.py
-
-Classifies Windows Security Events according to their severity level.
-
-Example:
-
-| Event ID | Severity |
-|----------|----------|
-|4624|Low|
-|4625|Medium|
-|4672|High|
-|4720|Critical|
-
----
-
-### brute_force_detector.py
-
-Detects repeated failed logon attempts (Event ID 4625) that could indicate a brute-force attack.
-
----
-
-### suspicious_ips.py
-
-Displays the IP addresses that generate the highest number of security events.
-
----
-
-## Installation
-
-Clone the repository.
+Clone the repository:
 
 ```bash
 git clone https://github.com/miltonquinterog/soc-alert-triage.git
 ```
 
-Move into the project.
+Move into the project folder:
 
 ```bash
 cd soc-alert-triage
 ```
 
-Install the dependencies.
+Install dependencies:
 
 ```bash
 pip install -r requirements.txt
@@ -118,34 +90,111 @@ pip install -r requirements.txt
 
 ---
 
-## Usage
+## ▶️ Usage
 
-Run any script individually.
-
-Example:
+Run the toolkit:
 
 ```bash
-python scripts/alert_classifier.py
+python3 main.py
 ```
 
----
+The interactive menu allows you to execute:
 
-## Skills Demonstrated
-
-- Log Analysis
-- Security Event Classification
-- Basic Threat Detection
-- Python Programming
-- Data Analysis with Pandas
-- Git Version Control
+- Alert Classifier
+- Brute Force Detector
+- IOC Detector
+- Full SOC Analysis
 
 ---
 
-## Author
+## 📊 Reports
 
-Milton Quintero
+The toolkit automatically generates the following reports:
 
-Cybersecurity Student
+| Report | Description |
+|---------|-------------|
+| classified_events.csv | Security events classified by severity |
+| brute_force_report.csv | Suspicious failed authentication attempts |
+| ioc_report.csv | Indicators of Compromise detected |
+
+Reports are stored inside the **reports/** directory.
+
+---
+
+## 🖥️ Windows Event IDs Used
+
+| Event ID | Description |
+|----------|-------------|
+| 4624 | Successful Logon |
+| 4625 | Failed Logon |
+| 4672 | Special Privileges Assigned |
+| 4688 | Process Creation |
+| 4720 | User Account Created |
+| 4728 | User Added to Administrators Group |
+
+---
+
+## 🛠️ Technologies
+
+- Python 3
+- Pandas
+- Windows Security Event Logs
+- CSV
+- Git
+- GitHub
+
+---
+
+---
+
+## 📸 Screenshots
+
+### Main Menu
+
+![Main Menu](images/main-menu.png)
+
+---
+
+### Alert Classifier
+
+![Alert Classifier](images/alert-classifier1.png)
+
+---
+
+### Brute Force Detector
+
+![Brute Force Detector](images/brute-force.png)
+
+---
+
+### IOC Detector
+
+![IOC Detector](images/ioc-detector.png)
+## 🚀 Future Improvements
+
+Planned improvements include:
+
+- MITRE ATT&CK technique mapping
+- Sigma rule integration
+- JSON report export
+- HTML report generation
+- Event filtering by date
+- Interactive dashboard
+- AI-assisted event analysis
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+## 👨‍💻 Author
+
+**Milton Quintero**
+
+Cybersecurity Student | SOC Analyst Enthusiast
 
 GitHub:
 

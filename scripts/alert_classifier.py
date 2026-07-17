@@ -1,14 +1,10 @@
+
 from pathlib import Path
 import pandas as pd
 
-# ==========================
-# Project Paths
-# ==========================
+from config.settings import WINDOWS_LOG, CLASSIFIED_REPORT
 
-BASE_DIR = Path(__file__).resolve().parent.parent
 
-CSV_FILE = BASE_DIR / "data" / "windows_security.csv"
-OUTPUT_FILE = BASE_DIR / "reports" / "classified_events.csv"
 
 # ==========================
 # Event Severity Mapping
@@ -28,7 +24,7 @@ def load_events():
     """
     Load Windows Security Events from CSV.
     """
-    return pd.read_csv(CSV_FILE)
+    return pd.read_csv(WINDOWS_LOG)
 
 
 def classify_events(df):
@@ -101,10 +97,10 @@ def generate_report(df):
     Save classified events into a CSV report.
     """
 
-    df.to_csv(OUTPUT_FILE, index=False)
+    df.to_csv(CLASSIFIED_REPORT, index=False)
 
     print("\nReport generated successfully.")
-    print(f"Location: {OUTPUT_FILE}")
+    print(f"Location: {CLASSIFIED_REPORT}")
 
 
 def main():
