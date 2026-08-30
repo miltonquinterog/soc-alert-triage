@@ -1,0 +1,1 @@
+{"preview":false,"result":{"_raw":"Nov  8 15:53:13 waldo-virtual-machine sshd[722]: Accepted password for analyst from 192.0.2.15 port 52000 ssh2","_time":"2022-11-08T15:53:13.000+00:00","host":"waldo-virtual-machine","user":"analyst","uid":"1000","rhost":"192.0.2.15","source":"LinuxAuth_waldo-virtual-machine.txt","sourcetype":"linux:auth","splunk_server":"ubuntu"}}
