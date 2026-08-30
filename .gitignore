@@ -1,15 +1,32 @@
 # Python
 __pycache__/
-*.pyc
+*.py[cod]
+*.pyo
 
-# Virtual Environment
+# Virtual environments
+.venv/
 venv/
 
-# Generated reports
-reports/*.csv
+# Secrets / environment files
+.env
+.env.*
+!.env.example
 
-# VS Code
+# IDE / editor
 .vscode/
+.idea/
 
-# macOS
+# OS files
 .DS_Store
+Thumbs.db
+
+# Test / cache
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Local logs
+*.log
+
+# Large / local datasets
+data/*.part
